@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "monefy"
+version = "0.1.0"
+description = "Package to deal with parsing of monefy data"
+authors = ["Rodrigo Pizarro <rpizarrosch@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.0.1"
+typer = "^0.9.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.269"
+black = "^23.3.0"
+flake8 = "^6.0.0"
+
+[tool.poetry.scripts]
+monefy = "monefy.cli:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pycodestyle]
+max-line-length = 120
