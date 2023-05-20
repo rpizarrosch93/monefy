@@ -32,13 +32,20 @@ class Formatter:
 
         return df
 
+    def __str_to_float(self, column: pd.Series) -> pd.Series:
+        column = column.apply(lambda x: x.replace('"', ""))
+        column = column.apply(lambda x: x.replace('.', ""))
+        column = column.apply(lambda x: x.replace(',', ""))
+        column = column.apply(lambda x: float(x))
+
+        return column
+
     def __format_amount(self, df: pd.DataFrame) -> pd.DataFrame:
         """Format amount column."""
         df_copy = df.copy()
         # Get rid of quotes and dots and commas from amount column to convert it to float.
-        df_copy.loc["amount", :] = df_copy["amount"].str.replace('"', "")
-        df_copy.loc["amount", :] = df_copy["amount"].str.replace(".", "")
-        df_copy.loc["amount", :] = df_copy["amount"].str.replace(",", "").astype(float)
+        df_copy["amount"] = self.__str_to_float(df_copy["amount"])
+
         return df_copy
 
     def __aggregate_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
